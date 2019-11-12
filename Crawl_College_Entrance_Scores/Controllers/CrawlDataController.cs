@@ -50,7 +50,7 @@ namespace Crawl_College_Entrance_Scores.Controllers
 			return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
 		}
 
-		private void ProcessCrawling(string url,string collegeCode,int year,EntranceScoresContext db)
+		private void ProcessCrawling(string url, string collegeCode,int year,EntranceScoresContext db)
 		{
 			string[] log = new string[1000];
 			HtmlAgilityPack.HtmlWeb webSite = new HtmlAgilityPack.HtmlWeb();

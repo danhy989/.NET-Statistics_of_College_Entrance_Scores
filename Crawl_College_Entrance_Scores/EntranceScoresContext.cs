@@ -21,7 +21,6 @@ namespace Crawl_College_Entrance_Scores
 
 		public DbSet<CollegeEntity> collegeEntities { get; set; }
 		public DbSet<MajorEntity> majorEntities { get; set; }
-
 		public DbSet<MajorCollege> majorColleges { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

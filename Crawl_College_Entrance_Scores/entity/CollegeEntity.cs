@@ -14,10 +14,6 @@ namespace Crawl_College_Entrance_Scores.entity
 
 		public ICollection<MajorCollege> MajorColleges { get; set; }
 
-		public CollegeEntity()
-		{
-			
-		}
-
+		public CollegeEntity(){}
 	}
 }
