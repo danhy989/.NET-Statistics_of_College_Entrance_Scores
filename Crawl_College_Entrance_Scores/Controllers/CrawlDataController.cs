@@ -145,7 +145,14 @@ namespace Crawl_College_Entrance_Scores.Controllers
 				//Add majorCollege to database
 				db.majorColleges.AddRange(majorColleges);
 
-				db.SaveChanges();
+				try
+				{
+					db.SaveChanges();
+				}catch(Exception e)
+				{
+
+				}
+				
 
 				return "Crawling data from " + year + " OK";
 			}
