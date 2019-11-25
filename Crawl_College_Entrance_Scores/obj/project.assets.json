@@ -5660,7 +5660,7 @@
       ]
     },
     "Microsoft.AspNetCore.Razor.Design/2.1.2": {
-      "sha512": "5xL/OYdQVt/ylA9p9Jamvkp7RdEPxmzW5pgmXuSb+UsjEjdBbPHGH187ibDqRvnAAyYghvBwgdYdcIAcQRuALw==",
+      "sha512": "fe1+dpy+eM4IX1zodsvkihO1Spuj0NecfStWzvkYoMo7/ziOsqSv4vFK36ZpBfHa4gpdCEwaU46EPzdq+ZDYhQ==",
       "type": "package",
       "path": "microsoft.aspnetcore.razor.design/2.1.2",
       "hasTools": true,
@@ -6024,12 +6024,13 @@
       ]
     },
     "Microsoft.CodeAnalysis.Analyzers/1.1.0": {
-      "sha512": "S9ruaWEs3tYpct5pqhgah2XDA4QS9esU/KUNzqQKppbPX3KKQluw3QVzAt89+913D/HaaaOx2hi4cm71RNWV9w==",
+      "sha512": "HS3iRWZKcUw/8eZ/08GXKY2Bn7xNzQPzf8gRPHGSowX7u7XXu9i9YEaBeBNKUXWfI7qjvT2zXtLUvbN0hds8vg==",
       "type": "package",
       "path": "microsoft.codeanalysis.analyzers/1.1.0",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.rtf",
         "analyzers/dotnet/cs/Microsoft.CodeAnalysis.Analyzers.dll",
         "analyzers/dotnet/cs/Microsoft.CodeAnalysis.CSharp.Analyzers.dll",
@@ -12765,23 +12766,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\danhy\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\X240\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Source\\me\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\Crawl_College_Entrance_Scores.csproj",
+      "projectUniqueName": "C:\\Source\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\Crawl_College_Entrance_Scores.csproj",
       "projectName": "Crawl_College_Entrance_Scores",
-      "projectPath": "D:\\Source\\me\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\Crawl_College_Entrance_Scores.csproj",
-      "packagesPath": "C:\\Users\\danhy\\.nuget\\packages\\",
-      "outputPath": "D:\\Source\\me\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\obj\\",
+      "projectPath": "C:\\Source\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\Crawl_College_Entrance_Scores.csproj",
+      "packagesPath": "C:\\Users\\X240\\.nuget\\packages\\",
+      "outputPath": "C:\\Source\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\danhy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\X240\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12821,6 +12818,7 @@
             "version": "[2.1.2, )"
           },
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
@@ -12839,10 +12837,16 @@
           }
         },
         "imports": [
-          "net461"
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
