@@ -8,8 +8,13 @@ namespace Crawl_College_Entrance_Scores.dto
 {
     public class MajorDTO
     {
-        private string code { get; set; }
-        private string name { get; set; }
-        public ICollection<MajorCollege> MajorColleges {get; set;}
+        public MajorDTO(string majorCode, int year)
+        {
+            this.majorCode = majorCode;
+            this.year = year;
+        }
+
+        public string majorCode { get; set; }
+        public int year { get; set; }
     }
 }

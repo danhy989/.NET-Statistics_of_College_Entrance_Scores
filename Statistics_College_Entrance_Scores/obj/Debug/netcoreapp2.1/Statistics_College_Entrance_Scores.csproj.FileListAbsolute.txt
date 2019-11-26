@@ -14,3 +14,5 @@ C:\Source\.NET-Statistics_of_College_Entrance_Scores\Statistics_College_Entrance
 C:\Source\.NET-Statistics_of_College_Entrance_Scores\Statistics_College_Entrance_Scores\bin\Debug\netcoreapp2.1\Statistics_College_Entrance_Scores.pdb
 C:\Source\.NET-Statistics_of_College_Entrance_Scores\Statistics_College_Entrance_Scores\obj\Debug\netcoreapp2.1\Statistics_College_Entrance_Scores.dll
 C:\Source\.NET-Statistics_of_College_Entrance_Scores\Statistics_College_Entrance_Scores\obj\Debug\netcoreapp2.1\Statistics_College_Entrance_Scores.pdb
+C:\Source\.NET-Statistics_of_College_Entrance_Scores\Statistics_College_Entrance_Scores\bin\Debug\netcoreapp2.1\Json_Rule\findByMajorCode.json
+C:\Source\.NET-Statistics_of_College_Entrance_Scores\Statistics_College_Entrance_Scores\bin\Debug\netcoreapp2.1\Json_Rule\findByCollegeCode.json

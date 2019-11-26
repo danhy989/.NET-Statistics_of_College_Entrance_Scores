@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/Crawl_College_Entrance_Scores",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:59161",
       "sslPort": 44324
@@ -22,7 +26,6 @@
     },
     "Crawl_College_Entrance_Scores": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
         "db_entrance_scores_password": "zjM6ZjTG#",

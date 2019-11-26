@@ -1,0 +1,23 @@
+{
+	"body":{
+		"majorCode":"123",
+		"majorName":"456",
+		"year":2019
+		"colleges":[
+					{
+						"collegeCode":"123",
+						"collegeName":"123",
+						"groupCode":"ABC",
+						"score":8.8
+					},
+					{
+						"collegeCode":"123",
+						"collegeName":"123",
+						"groupCode":"ABC",
+						"score":8.8
+					}
+				]
+	},
+	"took":300,
+	"message":"abc"
+}
