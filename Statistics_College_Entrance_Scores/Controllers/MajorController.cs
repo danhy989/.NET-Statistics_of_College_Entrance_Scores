@@ -63,7 +63,25 @@ namespace Statistics_College_Entrance_Scores.Controllers
                 return BadRequest(ModelState);
             }
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            var rs = this._majorService.findScoreByMajorCode(majorDTO.majorCode, majorDTO.year);
+            var rs = this._majorService.findScoreByMajorCode(majorDTO.majorCode,majorDTO.years);
+            watch.Stop();
+            var took = watch.ElapsedMilliseconds;
+            if (rs == null)
+            {
+                return NotFound(new JsonResponse(took, MessagesResponse.MESSAGE_NOT_FOUND, null));
+            }
+            return Ok(new JsonResponse(took, null, rs));
+        }
+
+        [HttpPost("compare")]
+        public IActionResult GetScoresByCollegeCompared([FromBody] ScoreCollegeComparedDTO scoreCollegeComparedDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            var rs = this._majorService.findScoreByCollegeCompared(scoreCollegeComparedDTO.majorCode, scoreCollegeComparedDTO.collegeCodes, scoreCollegeComparedDTO.years);
             watch.Stop();
             var took = watch.ElapsedMilliseconds;
             if (rs == null)

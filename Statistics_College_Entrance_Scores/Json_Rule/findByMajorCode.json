@@ -1,23 +1,24 @@
 {
-	"body":{
-		"majorCode":"123",
-		"majorName":"456",
-		"year":2019
-		"colleges":[
-					{
-						"collegeCode":"123",
-						"collegeName":"123",
-						"groupCode":"ABC",
-						"score":8.8
-					},
-					{
-						"collegeCode":"123",
-						"collegeName":"123",
-						"groupCode":"ABC",
-						"score":8.8
-					}
-				]
-	},
-	"took":300,
-	"message":"abc"
+    "took": 170,
+    "message": null,
+    "body": {
+        "majorCode": "114",
+        "majorName": "Kỹ thuật Hóa học;Công nghệ Thực phẩm;Công nghệ Sinh học;(Nhóm ngành)",
+        "years": [
+            2019
+        ],
+        "colleges": [
+            {
+                "collegeCode": "QSB",
+                "collegeName": "Đại học Bách Khoa - đại học Quốc Gia Tphcm",
+                "scores": [
+                    {
+                        "year": 2019,
+                        "score": 23.75,
+                        "groupCode": "A00, B00, D07"
+                    }
+                ]
+            }
+        ]
+    }
 }

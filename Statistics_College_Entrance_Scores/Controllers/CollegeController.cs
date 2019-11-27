@@ -59,7 +59,7 @@ namespace Statistics_College_Entrance_Scores.Controllers
                 return BadRequest(ModelState);
             }
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            var rs = this._collegeService.findScoreByCollegeCode(collegeDTO.collegeCode, collegeDTO.year);
+            var rs = this._collegeService.findScoreByCollegeCode(collegeDTO.collegeCode, collegeDTO.years);
             watch.Stop();
             var took = watch.ElapsedMilliseconds;
             if (rs == null)
@@ -68,5 +68,6 @@ namespace Statistics_College_Entrance_Scores.Controllers
             }
             return Ok(new JsonResponse(took, null, rs));
         }
+
     }
 }
