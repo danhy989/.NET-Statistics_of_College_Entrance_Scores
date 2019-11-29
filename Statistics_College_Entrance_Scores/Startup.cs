@@ -36,6 +36,7 @@ namespace Statistics_College_Entrance_Scores
             services.AddScoped<IMajorCollegeRepository, MajorCollegeRepository>();
             services.AddScoped<ICollegeRepository, CollegeRepository>();
             services.AddScoped<ICollegeService, CollegeService>();
+            services.AddScoped<IGuessService, GuessService>();
         }
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
