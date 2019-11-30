@@ -30,5 +30,6 @@ namespace Statistics_College_Entrance_Scores.Repository
         {
             return await Task.Run(() => _context.majorEntities);
         }
+
     }
 }

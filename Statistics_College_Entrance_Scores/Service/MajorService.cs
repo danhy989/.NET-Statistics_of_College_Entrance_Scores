@@ -15,9 +15,11 @@ namespace Statistics_College_Entrance_Scores.Service
         List<MajorEntity> GetAll();
         MajorEntity findByCode(string code);
         JsonMajor findScoreByCollegeCompared(string majorCode, IList<string> collegeCodes, IList<int> years);
+        List<MajorEntity> GetMajorsByGroupCode(string groupCode);
     }
     public class MajorService : IMajorService
     {
+        //@Autowire
         private readonly IMajorRepository _majorRepository;
         private readonly IMajorCollegeRepository _majorCollegeRepository;
         private readonly ICollegeRepository _collegeRepository;
@@ -99,6 +101,11 @@ namespace Statistics_College_Entrance_Scores.Service
                 jsonMajor.colleges = scoreColleges;
             }
             return jsonMajor;
+        }
+        public List<MajorEntity> GetMajorsByGroupCode(string groupCode)
+        {
+            var majors = this._majorCollegeRepository.GetMajorByGroupCode(groupCode);
+            return majors;
         }
     }
 }

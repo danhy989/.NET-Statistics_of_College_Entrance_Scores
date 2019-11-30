@@ -13,6 +13,8 @@ namespace Statistics_College_Entrance_Scores.Service
         JsonCollege findScoreByCollegeCode(string code, IList<int> years);
         List<CollegeEntity> GetAll();
         CollegeEntity findByCode(string code);
+        List<CollegeEntity> GetCollegeByProvince(long province_id);
+        List<CollegeEntity> GetCollegeByGroupCode(string groupCode);
     }
     public class CollegeService : ICollegeService
     {
@@ -78,6 +80,16 @@ namespace Statistics_College_Entrance_Scores.Service
         public List<CollegeEntity> GetAll()
         {
             return this._collegeRepository.GetAll().Result.ToList();
+        }
+
+        public List<CollegeEntity> GetCollegeByProvince(long province_id)
+        {
+            return this._collegeRepository.GetByProvince(province_id).Result;
+        }
+        public List<CollegeEntity> GetCollegeByGroupCode(string groupCode)
+        {
+            var colleges = this._majorCollegeRepository.GetCollegeByGroupCode(groupCode);
+            return colleges;
         }
     }
 }

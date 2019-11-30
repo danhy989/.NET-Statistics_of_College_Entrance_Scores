@@ -11,6 +11,7 @@ namespace Statistics_College_Entrance_Scores.Repository
     {
         Task<CollegeEntity> findByCode(string code);
         Task<IEnumerable<CollegeEntity>> GetAll();
+        Task<List<CollegeEntity>> GetByProvince(long province_id);
     }
     public class CollegeRepository : ICollegeRepository
     {
@@ -29,6 +30,12 @@ namespace Statistics_College_Entrance_Scores.Repository
         public async Task<IEnumerable<CollegeEntity>> GetAll()
         {
             return await Task.Run(() => _context.collegeEntities);
+        }
+
+        public async Task<List<CollegeEntity>> GetByProvince(long province_id)
+        {
+            var listColleges = await Task.Run(() => _context.collegeEntities.Where(x => x.province_id == province_id));
+            return listColleges.ToList();
         }
     }
 }

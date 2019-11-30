@@ -68,6 +68,40 @@ namespace Statistics_College_Entrance_Scores.Controllers
             }
             return Ok(new JsonResponse(took, null, rs));
         }
-
+        
+        [HttpGet("province/{code}")]
+        public IActionResult GetCollegeByProvince([FromRoute] long code)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            var rs = this._collegeService.GetCollegeByProvince(code);
+            watch.Stop();
+            var took = watch.ElapsedMilliseconds;
+            if (rs == null)
+            {
+                return NotFound(new JsonResponse(took, MessagesResponse.MESSAGE_NOT_FOUND, null));
+            }
+            return Ok(new JsonResponse(took, null, rs));
+        }
+        [HttpGet("groupCode/{code}")]
+        public IActionResult GetCollegeByGroupCode([FromRoute]string code)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            var rs = this._collegeService.GetCollegeByGroupCode(code);
+            watch.Stop();
+            var took = watch.ElapsedMilliseconds;
+            if (rs == null)
+            {
+                return NotFound(new JsonResponse(took, MessagesResponse.MESSAGE_NOT_FOUND, null));
+            }
+            return Ok(new JsonResponse(took, null, rs));
+        }
     }
 }

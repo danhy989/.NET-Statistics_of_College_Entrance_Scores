@@ -13,7 +13,8 @@ namespace Statistics_College_Entrance_Scores.Repository
         Task<List<MajorCollege>> GetMajorCollegesByCollegeCodeAndYear(string code, int year);
         List<MajorCollege> findScoreByCollegeCompared(string majorCode, IList<string> collegeCodes, int year);
         double[] GetPastYearsTrainData();
-
+        List<CollegeEntity> GetCollegeByGroupCode(string groupCode);
+        List<MajorEntity> GetMajorByGroupCode(string groupCode);
         double[] GetScores(string majorCode, string collegeCode, double[] years);
     }
     public class MajorCollegeRepository : IMajorCollegeRepository
@@ -73,5 +74,19 @@ namespace Statistics_College_Entrance_Scores.Repository
                 c.year <= years[years.Length-1]).OrderBy(c=>c.year).Select(s => s.score).ToArray();
             return rs;
         }
+
+        public List<CollegeEntity> GetCollegeByGroupCode(string groupCode)
+        {
+            var rs = this._context.majorColleges.Where(c=>c.groupCode.Replace(",", " ").IndexOf(groupCode) >= 0).Select(c => c.CollegeEntity).Distinct();
+            var colleges = rs.ToList();
+            return colleges;
+        }
+        public List<MajorEntity> GetMajorByGroupCode(string groupCode)
+        {
+            var rs = this._context.majorColleges.Where(c=>c.groupCode.Replace(",", " ").IndexOf(groupCode) >= 0).Select(c => c.MajorEntity).Distinct();
+            var majors = rs.ToList();
+            return majors;
+        }
+
     }
 }

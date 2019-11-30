@@ -39,7 +39,7 @@ namespace Crawl_College_Entrance_Scores.Controllers
 			{
 				this.initListValueFromDB(db);
 			}
-			
+			                        
 		}
 
 		private void initListValueFromDB(EntranceScoresContext db)
@@ -174,8 +174,10 @@ namespace Crawl_College_Entrance_Scores.Controllers
 				{
 					//Add majorCollege to database
 
+                    //Convert map to list
 					newMajorEntities = newMajorMap.Select(p => new MajorEntity { code = p.Key, name = p.Value }).ToList();
 
+                    //Add list to db
 					db.majorEntities.AddRange(newMajorEntities);
 				}
 

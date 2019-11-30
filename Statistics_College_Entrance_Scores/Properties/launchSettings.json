@@ -24,6 +24,9 @@
       "commandName": "Project",
       "launchUrl": "api/values",
       "environmentVariables": {
+        "db_entrance_scores_password": "zjM6ZjTG#",
+        "db_entrance_scores_username": "postgres",
+        "db_entrance_scores_host": "35.240.228.120",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "https://localhost:5001;http://localhost:5000"
