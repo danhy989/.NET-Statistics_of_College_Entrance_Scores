@@ -7,17 +7,15 @@ namespace Statistics_College_Entrance_Scores.Dto
 {
 	public class GuessScoreDTO
 	{
-		
-	}
-
-	public class GuessYearsDTO
-	{
-		public GuessYearsDTO(int[] years)
+		public GuessScoreDTO(string collegeCode, string majorCode, int[] years)
 		{
+			this.collegeCode = collegeCode;
+			this.majorCode = majorCode;
 			this.years = years;
 		}
 
+		public string collegeCode { get; set; }
+		public string majorCode { get; set; }
 		public int[] years { get; set; }
-
 	}
 }

@@ -13,11 +13,12 @@ namespace Statistics_College_Entrance_Scores.Common
             double[] yVals,
             int year)
         {
+			
             if (xVals.Length != yVals.Length)
             {
                 throw new Exception("Input values should be with the same length.");
             }
-
+			
 			Tuple<double, double> p = Fit.Line(xVals, yVals);
 			double intercept = p.Item1;
 			double slope = p.Item2;

@@ -22,7 +22,7 @@ namespace Statistics_College_Entrance_Scores.Controllers
         }
 
         [HttpPost]
-        public IActionResult GuessMajorScore([FromBody] GuessYearsDTO guessYears)
+        public IActionResult GuessMajorScore([FromBody] GuessScoreDTO guessScoreDTO)
         {
 
 			if (!ModelState.IsValid)
@@ -34,14 +34,19 @@ namespace Statistics_College_Entrance_Scores.Controllers
 
 			var currentYear = DateTime.Now.Year;
 
-			var checkGuessYear = guessYears.years.Where(c => c <= currentYear).Count();
+			var checkGuessYear = guessScoreDTO.years.Where(c => c <= currentYear).Count();
 
 			if(checkGuessYear >0)
 			{
 				return BadRequest(MessagesResponse.MESSAGE_BAD_REQUEST_GUESS_YEAR);
 			}
 
-			var rs = this._guessService.guessMajorScoreById("7340101","KHA", guessYears.years);
+			if(guessScoreDTO.collegeCode == null || guessScoreDTO.majorCode == null)
+			{
+				return BadRequest(MessagesResponse.MESSAGE_BAD_REQUEST_GUESS);
+			}
+
+			var rs = this._guessService.guessMajorScoreById(guessScoreDTO.majorCode, guessScoreDTO.collegeCode, guessScoreDTO.years);
 
             watch.Stop();
             var took = watch.ElapsedMilliseconds;
