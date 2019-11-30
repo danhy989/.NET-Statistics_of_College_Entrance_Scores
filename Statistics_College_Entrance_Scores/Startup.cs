@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Statistics_College_Entrance_Scores.Repository;
 using Statistics_College_Entrance_Scores.Service;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Statistics_College_Entrance_Scores
 {
@@ -31,7 +32,11 @@ namespace Statistics_College_Entrance_Scores
 		{
             services.AddDbContext<EntranceScoresContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddScoped<IMajorService,MajorService>();
+			services.AddSwaggerGen(c =>
+			{
+				c.SwaggerDoc("v1", new Info { Title = "Values Api", Version = "v1" });
+			});
+			services.AddScoped<IMajorService,MajorService>();
             services.AddScoped<IMajorRepository, MajorRepository>();
             services.AddScoped<IMajorCollegeRepository, MajorCollegeRepository>();
             services.AddScoped<ICollegeRepository, CollegeRepository>();
@@ -55,6 +60,12 @@ namespace Statistics_College_Entrance_Scores
 
 			app.UseHttpsRedirection();
 			app.UseMvc();
+
+			app.UseSwagger();
+			app.UseSwaggerUI(c =>
+			{
+				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Values Api V1");
+			});
 		}
 	}
 }

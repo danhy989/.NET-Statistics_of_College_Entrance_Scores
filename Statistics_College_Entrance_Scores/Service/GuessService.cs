@@ -1,4 +1,5 @@
 ﻿using Statistics_College_Entrance_Scores.Common;
+using Statistics_College_Entrance_Scores.Dto;
 using Statistics_College_Entrance_Scores.Repository;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,7 @@ namespace Statistics_College_Entrance_Scores.Service
 {
     public interface IGuessService
     {
-        double guessMajorScoreById(string majorCode, string collegeCod, IList<int> yearsGuess);
-        double guessMajorScoreById(string code, int year);
+        IList<JsonScore> guessMajorScoreById(string majorCode, string collegeCod, IList<int> yearsGuess);
     }
     public class GuessService : IGuessService
     {
@@ -19,24 +19,19 @@ namespace Statistics_College_Entrance_Scores.Service
         {
             this._majorCollegeRepository = majorCollegeRepository;
         }
-        
-        public double guessMajorScoreById(string code, int year)
-        {
-            var years = this._majorCollegeRepository.GetPastYearsTrainData();
-            return 0;
-        }
 
-        public double guessMajorScoreById(string majorCode,string collegeCode, IList<int> yearsGuess)
+        public IList<JsonScore> guessMajorScoreById(string majorCode,string collegeCode, IList<int> yearsGuess)
         {
-            var years = this._majorCollegeRepository.GetPastYearsTrainData();
-            var scores = this._majorCollegeRepository.GetScores(majorCode, collegeCode, years);
+            var yearsPastTrainData = this._majorCollegeRepository.GetPastYearsTrainData();
+            var scoresPastTrainData = this._majorCollegeRepository.GetScores(majorCode, collegeCode, yearsPastTrainData);
+			var guessScoreYearList = new List<JsonScore>();
             foreach(var y in yearsGuess)
             {
-                var scoreGuess = LinearRegressionHelper.LinearRegression(years, scores, y);
-                //New object p2
+                var scoreGuess = LinearRegressionHelper.LinearRegression(yearsPastTrainData, scoresPastTrainData, y);
+				guessScoreYearList.Add(new JsonScore(y,scoreGuess,null));
             }
 
-            return 0;
+            return guessScoreYearList;
         }
     }
 }

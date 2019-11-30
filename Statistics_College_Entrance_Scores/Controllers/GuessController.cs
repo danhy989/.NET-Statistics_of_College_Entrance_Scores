@@ -21,19 +21,32 @@ namespace Statistics_College_Entrance_Scores.Controllers
             this._guessService = guessService;
         }
 
-         [HttpGet]
-        public IActionResult GuessMajorScore()
+        [HttpPost]
+        public IActionResult GuessMajorScore([FromBody] GuessYearsDTO guessYears)
         {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
 
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-            this._guessService.guessMajorScoreById("7340101","KHA",new int[] { 2020,2021});
+			var watch = System.Diagnostics.Stopwatch.StartNew();
 
+			var currentYear = DateTime.Now.Year;
 
+			var checkGuessYear = guessYears.years.Where(c => c <= currentYear).Count();
+
+			if(checkGuessYear >0)
+			{
+				return BadRequest(MessagesResponse.MESSAGE_BAD_REQUEST_GUESS_YEAR);
+			}
+
+			var rs = this._guessService.guessMajorScoreById("7340101","KHA", guessYears.years);
 
             watch.Stop();
             var took = watch.ElapsedMilliseconds;
-            return Ok(new JsonResponse(took, null, 0));
+            return Ok(new JsonResponse(took, null, rs));
         }
-    }
+
+	}
 }
