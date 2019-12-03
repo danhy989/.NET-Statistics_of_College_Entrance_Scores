@@ -1,5 +1,5 @@
-﻿using Crawl_College_Entrance_Scores;
-using Crawl_College_Entrance_Scores.entity;
+﻿using Statistics_College_Entrance_Scores;
+using Statistics_College_Entrance_Scores.entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

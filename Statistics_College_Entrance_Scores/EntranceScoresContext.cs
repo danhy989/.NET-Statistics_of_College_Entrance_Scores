@@ -1,14 +1,10 @@
-﻿using Crawl_College_Entrance_Scores.entity;
+﻿using Statistics_College_Entrance_Scores.entity;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Crawl_College_Entrance_Scores
+namespace Statistics_College_Entrance_Scores
 {
-	public class EntranceScoresContext : DbContext, IDisposable
+    public class EntranceScoresContext : DbContext, IDisposable
 	{
 		public EntranceScoresContext()
 		{
@@ -33,6 +29,7 @@ namespace Crawl_College_Entrance_Scores
 			optionsBuilder.EnableSensitiveDataLogging();
 		}
 
+        
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			//Configure default schema

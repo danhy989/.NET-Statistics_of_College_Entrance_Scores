@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Crawl_College_Entrance_Scores.entity;
+using Statistics_College_Entrance_Scores.entity;
 
-namespace Crawl_College_Entrance_Scores.dto
+namespace Statistics_College_Entrance_Scores.dto
 {
     public class CollegeDTO
     {

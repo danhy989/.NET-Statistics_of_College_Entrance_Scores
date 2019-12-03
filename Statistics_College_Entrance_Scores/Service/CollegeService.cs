@@ -1,4 +1,4 @@
-﻿using Crawl_College_Entrance_Scores.entity;
+﻿using Statistics_College_Entrance_Scores.entity;
 using Statistics_College_Entrance_Scores.Dto;
 using Statistics_College_Entrance_Scores.Repository;
 using System;
@@ -15,6 +15,7 @@ namespace Statistics_College_Entrance_Scores.Service
         CollegeEntity findByCode(string code);
         List<CollegeEntity> GetCollegeByProvince(long province_id);
         List<CollegeEntity> GetCollegeByGroupCode(string groupCode);
+        List<CollegeEntity> GetCollegesByName(string name);
     }
     public class CollegeService : ICollegeService
     {
@@ -89,6 +90,11 @@ namespace Statistics_College_Entrance_Scores.Service
         public List<CollegeEntity> GetCollegeByGroupCode(string groupCode)
         {
             var colleges = this._majorCollegeRepository.GetCollegeByGroupCode(groupCode);
+            return colleges;
+        }
+        public List<CollegeEntity> GetCollegesByName(string name)
+        {
+            var colleges = this._collegeRepository.GetByName(name).Result;
             return colleges;
         }
     }

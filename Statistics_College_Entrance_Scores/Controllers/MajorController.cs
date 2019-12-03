@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Crawl_College_Entrance_Scores;
-using Crawl_College_Entrance_Scores.entity;
+using Statistics_College_Entrance_Scores;
+using Statistics_College_Entrance_Scores.entity;
 using Statistics_College_Entrance_Scores.Repository;
 using Statistics_College_Entrance_Scores.Dto;
 using Statistics_College_Entrance_Scores.Common;
-using Crawl_College_Entrance_Scores.dto;
+using Statistics_College_Entrance_Scores.dto;
 using Statistics_College_Entrance_Scores.Service;
 
 namespace Statistics_College_Entrance_Scores.Controllers
@@ -100,6 +100,24 @@ namespace Statistics_College_Entrance_Scores.Controllers
             }
             var watch = System.Diagnostics.Stopwatch.StartNew();
             var rs = this._majorService.GetMajorsByGroupCode(code);
+            watch.Stop();
+            var took = watch.ElapsedMilliseconds;
+            if (rs == null)
+            {
+                return NotFound(new JsonResponse(took, MessagesResponse.MESSAGE_NOT_FOUND, null));
+            }
+            return Ok(new JsonResponse(took, null, rs));
+        }
+
+        [HttpGet("find/{name}")]
+        public IActionResult GetMajorsByName([FromRoute]string name)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            var rs = this._majorService.GetMajorsByName(name);
             watch.Stop();
             var took = watch.ElapsedMilliseconds;
             if (rs == null)

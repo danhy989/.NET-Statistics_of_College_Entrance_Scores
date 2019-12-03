@@ -1,9 +1,11 @@
-﻿using Crawl_College_Entrance_Scores;
-using Crawl_College_Entrance_Scores.entity;
+﻿using Statistics_College_Entrance_Scores;
+using Statistics_College_Entrance_Scores.entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace Statistics_College_Entrance_Scores.Repository
 {
@@ -12,6 +14,7 @@ namespace Statistics_College_Entrance_Scores.Repository
         Task<CollegeEntity> findByCode(string code);
         Task<IEnumerable<CollegeEntity>> GetAll();
         Task<List<CollegeEntity>> GetByProvince(long province_id);
+        Task<List<CollegeEntity>> GetByName(string text);
     }
     public class CollegeRepository : ICollegeRepository
     {
@@ -36,6 +39,17 @@ namespace Statistics_College_Entrance_Scores.Repository
         {
             var listColleges = await Task.Run(() => _context.collegeEntities.Where(x => x.province_id == province_id));
             return listColleges.ToList();
+        }
+
+        public async Task<List<CollegeEntity>> GetByName(string name)
+        {
+            var param = name.Replace(" ", "&");
+            RawSqlString rawSqlString = new RawSqlString("select  * from \"Entrance_Scores\".\"collegeEntities\"" +
+            "where to_tsvector(convertnonunicode(name)) @@ to_tsquery(convertnonunicode({0}))");
+            var listColleges = await Task.Run(()=> _context.collegeEntities
+                .FromSql(rawSqlString, param)
+                .ToList());
+            return listColleges;
         }
     }
 }

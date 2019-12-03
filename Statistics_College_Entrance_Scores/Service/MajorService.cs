@@ -1,4 +1,4 @@
-﻿using Crawl_College_Entrance_Scores.entity;
+﻿using Statistics_College_Entrance_Scores.entity;
 using Statistics_College_Entrance_Scores.Dto;
 using Statistics_College_Entrance_Scores.Repository;
 using System;
@@ -16,6 +16,7 @@ namespace Statistics_College_Entrance_Scores.Service
         MajorEntity findByCode(string code);
         JsonMajor findScoreByCollegeCompared(string majorCode, IList<string> collegeCodes, IList<int> years);
         List<MajorEntity> GetMajorsByGroupCode(string groupCode);
+        List<MajorEntity> GetMajorsByName(string name);
     }
     public class MajorService : IMajorService
     {
@@ -104,7 +105,13 @@ namespace Statistics_College_Entrance_Scores.Service
         }
         public List<MajorEntity> GetMajorsByGroupCode(string groupCode)
         {
-            var majors = this._majorCollegeRepository.GetMajorByGroupCode(groupCode);
+            var majors = _majorCollegeRepository.GetMajorByGroupCode(groupCode);
+            return majors;
+        }
+
+        public List<MajorEntity> GetMajorsByName(string name)
+        {
+            var majors = _majorRepository.GetByName(name).Result;
             return majors;
         }
     }

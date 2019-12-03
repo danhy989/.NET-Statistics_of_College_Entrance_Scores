@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Crawl_College_Entrance_Scores.dto;
+using Statistics_College_Entrance_Scores.dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Statistics_College_Entrance_Scores.Common;
@@ -95,6 +95,24 @@ namespace Statistics_College_Entrance_Scores.Controllers
             }
             var watch = System.Diagnostics.Stopwatch.StartNew();
             var rs = this._collegeService.GetCollegeByGroupCode(code);
+            watch.Stop();
+            var took = watch.ElapsedMilliseconds;
+            if (rs == null)
+            {
+                return NotFound(new JsonResponse(took, MessagesResponse.MESSAGE_NOT_FOUND, null));
+            }
+            return Ok(new JsonResponse(took, null, rs));
+        }
+
+        [HttpGet("find/{name}")]
+        public IActionResult GetCollegeByName([FromRoute]string name)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            var rs = this._collegeService.GetCollegesByName(name);
             watch.Stop();
             var took = watch.ElapsedMilliseconds;
             if (rs == null)

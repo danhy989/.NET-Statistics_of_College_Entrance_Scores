@@ -1,6 +1,7 @@
-﻿using Crawl_College_Entrance_Scores;
-using Crawl_College_Entrance_Scores.entity;
+﻿using Statistics_College_Entrance_Scores;
+using Statistics_College_Entrance_Scores.entity;
 using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Statistics_College_Entrance_Scores.Repository
     {
        Task<IEnumerable<MajorEntity>> GetAll();
        Task<MajorEntity> findByCode(string code);
+        Task<List<MajorEntity>> GetByName(string name);
     }
     public class MajorRepository : IMajorRepository
     {
@@ -31,5 +33,15 @@ namespace Statistics_College_Entrance_Scores.Repository
             return await Task.Run(() => _context.majorEntities);
         }
 
+        public async Task<List<MajorEntity>> GetByName(string name)
+        {
+            var param = name.Replace(" ", "&");
+            RawSqlString rawSqlString = new RawSqlString("select  * from \"Entrance_Scores\".\"majorEntities\"" +
+            "where to_tsvector(convertnonunicode(name)) @@ to_tsquery(convertnonunicode({0}))");
+            var listMajors = await Task.Run(() => _context.majorEntities
+                .FromSql(rawSqlString, param)
+                .ToList());
+            return listMajors;
+        }
     }
 }
