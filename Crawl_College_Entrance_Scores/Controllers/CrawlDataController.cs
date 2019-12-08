@@ -66,14 +66,13 @@ namespace Crawl_College_Entrance_Scores.Controllers
 
 			try
 			{
-				var html = document.DocumentNode.SelectSingleNode("//div[@class='resul-seah']");
+				var html = document.DocumentNode.SelectSingleNode("//div[@class='tabs']");
 
-				var tableNode = html.SelectNodes("//table");
+				var tableNode = html.SelectSingleNode("//table");
 
 				int i = 0;
 
-				Console.WriteLine("Found: " + tableNode[0].Id);
-				foreach (HtmlNode row in tableNode[0].SelectNodes("//tr[@class='bg_white']"))
+				foreach (HtmlNode row in tableNode.SelectNodes("tr[@class='bg_white']"))
 				{
 					try
 					{
@@ -177,8 +176,13 @@ namespace Crawl_College_Entrance_Scores.Controllers
                     //Convert map to list
 					newMajorEntities = newMajorMap.Select(p => new MajorEntity { code = p.Key, name = p.Value }).ToList();
 
+					Console.WriteLine("Begin the process of adding industry of the "+year+" to the database");
+					 
                     //Add list to db
 					db.majorEntities.AddRange(newMajorEntities);
+
+					Console.WriteLine("Finish process of add industry!");
+
 				}
 
 				db.SaveChanges();
