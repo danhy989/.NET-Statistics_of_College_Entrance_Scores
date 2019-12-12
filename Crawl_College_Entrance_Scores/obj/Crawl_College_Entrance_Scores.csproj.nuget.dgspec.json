@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Source\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\Crawl_College_Entrance_Scores.csproj": {}
+    "D:\\Study\\Github\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\Crawl_College_Entrance_Scores.csproj": {}
   },
   "projects": {
-    "C:\\Source\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\Crawl_College_Entrance_Scores.csproj": {
+    "D:\\Study\\Github\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\Crawl_College_Entrance_Scores.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Source\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\Crawl_College_Entrance_Scores.csproj",
+        "projectUniqueName": "D:\\Study\\Github\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\Crawl_College_Entrance_Scores.csproj",
         "projectName": "Crawl_College_Entrance_Scores",
-        "projectPath": "C:\\Source\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\Crawl_College_Entrance_Scores.csproj",
-        "packagesPath": "C:\\Users\\X240\\.nuget\\packages\\",
-        "outputPath": "C:\\Source\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\obj\\",
+        "projectPath": "D:\\Study\\Github\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\Crawl_College_Entrance_Scores.csproj",
+        "packagesPath": "C:\\Users\\Hoang An\\.nuget\\packages\\",
+        "outputPath": "D:\\Study\\Github\\.NET-Statistics_of_College_Entrance_Scores\\Crawl_College_Entrance_Scores\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\X240\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Hoang An\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

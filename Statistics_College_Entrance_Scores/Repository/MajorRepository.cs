@@ -36,12 +36,12 @@ namespace Statistics_College_Entrance_Scores.Repository
         public async Task<List<MajorEntity>> GetByName(string name)
         {
             var param = name.Replace(" ", "&");
-            RawSqlString rawSqlString = new RawSqlString("select  * from \"Entrance_Scores\".\"majorEntities\"" +
+            RawSqlString rawSqlString = new RawSqlString("select  * from \"college_major\"" +
             "where to_tsvector(convertnonunicode(name)) @@ to_tsquery(convertnonunicode({0}))");
-            var listMajors = await Task.Run(() => _context.majorEntities
+            var listColleges = await Task.Run(() => _context.majorEntities
                 .FromSql(rawSqlString, param)
                 .ToList());
-            return listMajors;
+            return listColleges;
         }
     }
 }
