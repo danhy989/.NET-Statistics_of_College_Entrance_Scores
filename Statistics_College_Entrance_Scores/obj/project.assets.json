@@ -12807,11 +12807,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/danhy989/Documents/me/.NET-Statistics_of_College_Entrance_Scores/Statistics_College_Entrance_Scores/Statistics_College_Entrance_Scores.csproj",
+      "projectUniqueName": "/home/danhy989/Documents/me/NET-Statistics_of_College_Entrance_Scores/Statistics_College_Entrance_Scores/Statistics_College_Entrance_Scores.csproj",
       "projectName": "Statistics_College_Entrance_Scores",
-      "projectPath": "/home/danhy989/Documents/me/.NET-Statistics_of_College_Entrance_Scores/Statistics_College_Entrance_Scores/Statistics_College_Entrance_Scores.csproj",
+      "projectPath": "/home/danhy989/Documents/me/NET-Statistics_of_College_Entrance_Scores/Statistics_College_Entrance_Scores/Statistics_College_Entrance_Scores.csproj",
       "packagesPath": "/home/danhy989/.nuget/packages/",
-      "outputPath": "/home/danhy989/Documents/me/.NET-Statistics_of_College_Entrance_Scores/Statistics_College_Entrance_Scores/obj/",
+      "outputPath": "/home/danhy989/Documents/me/NET-Statistics_of_College_Entrance_Scores/Statistics_College_Entrance_Scores/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"
