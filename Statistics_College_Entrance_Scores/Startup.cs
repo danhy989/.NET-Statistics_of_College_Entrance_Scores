@@ -30,19 +30,19 @@ namespace Statistics_College_Entrance_Scores
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<EntranceScoresContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddCors(options =>
-    {
-        options.AddPolicy("AllowAll",
-            builder =>
             {
-                builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials();
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                    });
             });
-    });
+            services.AddDbContext<EntranceScoresContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwaggerGen(c =>
             {
@@ -59,6 +59,7 @@ namespace Statistics_College_Entrance_Scores
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseCors("AllowAll");
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
             if (env.IsDevelopment())
@@ -71,7 +72,6 @@ namespace Statistics_College_Entrance_Scores
             }
 
             app.UseHttpsRedirection();
-            app.UseCors("AllowAll");
             app.UseMvc();
 
             app.UseSwagger();
