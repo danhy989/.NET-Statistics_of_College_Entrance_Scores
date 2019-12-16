@@ -1,6 +1,7 @@
 ﻿using Statistics_College_Entrance_Scores;
 using Statistics_College_Entrance_Scores.entity;
 using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace Statistics_College_Entrance_Scores.Repository
         List<CollegeEntity> GetCollegeByGroupCode(string groupCode);
         List<MajorEntity> GetMajorByGroupCode(string groupCode);
         double[] GetScores(string majorCode, string collegeCode, double[] years);
+        int[] GetYears();
     }
     public class MajorCollegeRepository : IMajorCollegeRepository
     {
@@ -88,5 +90,13 @@ namespace Statistics_College_Entrance_Scores.Repository
             return majors;
         }
 
+        public int[] GetYears()
+        {
+            var listColleges = _context.majorColleges;
+            var rs = listColleges.Select(y => y.year).Distinct().ToArray();
+            Array.Sort(rs);
+            Array.Reverse(rs);
+            return rs;
+        }
     }
 }
