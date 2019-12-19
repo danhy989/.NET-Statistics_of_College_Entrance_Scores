@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Statistics_College_Entrance_Scores.Dto;
 using Statistics_College_Entrance_Scores.Service;
+using Statistics_College_Entrance_Scores.Common;
 
 namespace Statistics_College_Entrance_Scores.Controllers
 {
@@ -29,7 +25,23 @@ namespace Statistics_College_Entrance_Scores.Controllers
             var took = watch.ElapsedMilliseconds;
             return Ok(new JsonResponse(took, null, rs));
         }
+
+        [HttpGet("find/{name}")]
+        public IActionResult GetMajorsByName([FromRoute]string name)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            var rs = this._majorCollegeService.FindMajorAndCollegeByName(name);
+            watch.Stop();
+            var took = watch.ElapsedMilliseconds;
+            if (rs == null)
+            {
+                return NotFound(new JsonResponse(took, MessagesResponse.MESSAGE_NOT_FOUND, null));
+            }
+            return Ok(new JsonResponse(took, null, rs));
+        }
     }
-
-
 }

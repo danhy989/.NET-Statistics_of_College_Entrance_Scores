@@ -1,5 +1,4 @@
-﻿using Statistics_College_Entrance_Scores;
-using Statistics_College_Entrance_Scores.entity;
+﻿using Statistics_College_Entrance_Scores.entity;
 using System;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -18,6 +17,8 @@ namespace Statistics_College_Entrance_Scores.Repository
         List<MajorEntity> GetMajorByGroupCode(string groupCode);
         double[] GetScores(string majorCode, string collegeCode, double[] years);
         int[] GetYears();
+        Task<List<MajorEntity>> FindMajorAndCollegeByName(string name);
+
     }
     public class MajorCollegeRepository : IMajorCollegeRepository
     {
@@ -97,6 +98,17 @@ namespace Statistics_College_Entrance_Scores.Repository
             Array.Sort(rs);
             Array.Reverse(rs);
             return rs;
+        }
+
+        public async Task<List<MajorEntity>> FindMajorAndCollegeByName(string name)
+        {
+            var param = name.Replace(" ", "&");
+            RawSqlString rawSqlString = new RawSqlString("select  * from \"college_major\"" +
+            "where to_tsvector(convertnonunicode(name)) @@ to_tsquery(convertnonunicode({0}))");
+            var listMajors = await Task.Run(() => _context.majorEntities
+                .FromSql(rawSqlString, param)
+                .ToList());
+            return listMajors;
         }
     }
 }
