@@ -45,7 +45,7 @@ namespace Statistics_College_Entrance_Scores.Repository
         {
             var param = name.Replace(" ", "&");
             RawSqlString rawSqlString = new RawSqlString("select  * from \"Entrance_Scores\".\"collegeEntities\"" +
-            "where to_tsvector(convertnonunicode(name)) @@ to_tsquery(convertnonunicode({0}))");
+            "where to_tsvector(convertnonunicode(name) || ' ' || code) @@ to_tsquery(convertnonunicode({0}))");
             var listColleges = await Task.Run(()=> _context.collegeEntities
                 .FromSql(rawSqlString, param)
                 .ToList());
