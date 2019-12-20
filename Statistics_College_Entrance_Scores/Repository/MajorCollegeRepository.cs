@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MathNet.Numerics;
 
 namespace Statistics_College_Entrance_Scores.Repository
 {
@@ -52,15 +53,17 @@ namespace Statistics_College_Entrance_Scores.Repository
 
         public double[] GetPastYearsTrainData()
         {
-            var yearsQuery = _context.majorColleges.GroupBy(
-                c => new { c.year }).Select(g => new
+            var yearsQuery = _context.majorColleges
+                .Where(s=>s.MajorEntityId.Equals("7340122") && s.CollegeEntityId.Equals("QSC"))
+                .GroupBy( c => new { c.year })
+                .Select(g => new
                 {
                     g.Key.year
-                }).OrderBy(x => x.year).ToList();
+                })
+                .OrderBy(x => x.year).ToList();
 
             double[] years = new double[yearsQuery.Count];
 
-          
             for(int i = 0; i < yearsQuery.Count; i++)
             {
                 years[i] = yearsQuery[i].year;
@@ -74,7 +77,7 @@ namespace Statistics_College_Entrance_Scores.Repository
             var rs = this._context.majorColleges.Where(
                 c => c.MajorEntityId.Equals(majorCode) &&
                 c.CollegeEntityId.Equals(collegeCode) && c.year >= years[0] &&
-                c.year <= years[years.Length-1]).OrderBy(c=>c.year).Select(s => s.score).ToArray();
+                c.year <= years[years.Length - 1]).OrderBy(c => c.year).Select(s => s.score).ToArray();
             return rs;
         }
 
