@@ -12,7 +12,7 @@ namespace Statistics_College_Entrance_Scores.Service
 
     public interface IMajorService
     {
-        JsonMajorGroupByYears findScoreByMajorCode(string majorCode,IList<int> years);
+        JsonMajorGroupByYears findScoreByMajorCode(string majorCode,List<int> years);
         List<MajorEntity> GetAll();
         MajorEntity findByCode(string code);
         JsonMajor findScoreByCollegeCompared(string majorCode, IList<string> collegeCodes, IList<int> years);
@@ -42,8 +42,9 @@ namespace Statistics_College_Entrance_Scores.Service
             return this._majorRepository.findByCode(code).Result;
         }
 
-        public JsonMajorGroupByYears findScoreByMajorCode(string majorCode, IList<int> years)
+        public JsonMajorGroupByYears findScoreByMajorCode(string majorCode, List<int> years)
         {
+            years.Sort((s1, s2) => s2.CompareTo(s1));
             var jsonMajorGroupByYears = new JsonMajorGroupByYears();
 
             var majorName = _majorRepository.findByCode(majorCode).Result.name;

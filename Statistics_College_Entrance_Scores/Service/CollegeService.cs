@@ -11,7 +11,7 @@ namespace Statistics_College_Entrance_Scores.Service
 {
     public interface ICollegeService
     {
-        JsonCollegeGroupByYears findScoreByCollegeCode(string code, IList<int> years);
+        JsonCollegeGroupByYears findScoreByCollegeCode(string code, List<int> years);
         List<CollegeEntity> GetAll();
         CollegeEntity findByCode(string code);
         List<CollegeEntity> GetCollegeByProvince(long province_id);
@@ -35,8 +35,10 @@ namespace Statistics_College_Entrance_Scores.Service
             return this._collegeRepository.findByCode(code).Result;
         }
 
-        public JsonCollegeGroupByYears findScoreByCollegeCode(string code, IList<int> years)
+        public JsonCollegeGroupByYears findScoreByCollegeCode(string code, List<int> years)
         {
+            years.Sort((s1, s2) => s2.CompareTo(s1));
+
             var jsonCollegeGroupByYears = new JsonCollegeGroupByYears();
 
             var collegeName = _collegeRepository.findByCode(code).Result.name;

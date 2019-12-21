@@ -8,14 +8,14 @@ namespace Statistics_College_Entrance_Scores.dto
 {
     public class CollegeDTO
     {
-        public CollegeDTO(string collegeCode, IList<int> years)
+        public CollegeDTO(string collegeCode, List<int> years)
         {
             this.collegeCode = collegeCode;
             this.years = years;
         }
 
         public string collegeCode { get; set; }
-        public IList<int> years { get; set; }
+        public List<int> years { get; set; }
     }
 
     public class ScoreCollegeComparedDTO

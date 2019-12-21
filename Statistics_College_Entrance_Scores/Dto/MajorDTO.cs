@@ -8,13 +8,13 @@ namespace Statistics_College_Entrance_Scores.dto
 {
     public class MajorDTO
     {
-        public MajorDTO(string majorCode, IList<int> years)
+        public MajorDTO(string majorCode, List<int> years)
         {
             this.majorCode = majorCode;
             this.years = years;
         }
 
         public string majorCode { get; set; }
-        public IList<int> years { get; set; }
+        public List<int> years { get; set; }
     }
 }
