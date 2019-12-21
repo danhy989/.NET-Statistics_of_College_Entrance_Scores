@@ -5,12 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Statistics_College_Entrance_Scores.Payload;
 
 namespace Statistics_College_Entrance_Scores.Service
 {
     public interface ICollegeService
     {
-        JsonCollege findScoreByCollegeCode(string code, IList<int> years);
+        JsonCollegeGroupByYears findScoreByCollegeCode(string code, IList<int> years);
         List<CollegeEntity> GetAll();
         CollegeEntity findByCode(string code);
         List<CollegeEntity> GetCollegeByProvince(long province_id);
@@ -34,47 +35,41 @@ namespace Statistics_College_Entrance_Scores.Service
             return this._collegeRepository.findByCode(code).Result;
         }
 
-        public JsonCollege findScoreByCollegeCode(string code, IList<int> years)
+        public JsonCollegeGroupByYears findScoreByCollegeCode(string code, IList<int> years)
         {
-            var scoreMajors = new List<ScoreMajor>();
-            var jsonCollege = new JsonCollege();
-            var college = this._collegeRepository.findByCode(code).Result;
+            var jsonCollegeGroupByYears = new JsonCollegeGroupByYears();
 
-            jsonCollege.collegeCode = college.code;
-            jsonCollege.collegeName = college.name;
+            var collegeName = _collegeRepository.findByCode(code).Result.name;
+            var majors = new List<JsonMajorsInCollegeGroupByYears>();
 
-            foreach (var year in years)
+            foreach(var y in years)
             {
-                jsonCollege.years.Add(year);
+                var jmi = new JsonMajorsInCollegeGroupByYears();
+                var jsgbyList = new List<JsonScoreMajorGroupByYears>();
 
-                var majorColleges = this._majorCollegeRepository.GetMajorCollegesByCollegeCodeAndYear(code, year).Result;
-                majorColleges.ForEach(c =>
+                var majorColleges = _majorCollegeRepository.GetMajorCollegesByCollegeCodeAndYear(code, y).Result;
+                foreach(var mc in majorColleges)
                 {
-                    // Ignore benchmarking capacity shiken
-                    if (c.score <= 30)
-                    {
-                        if (scoreMajors.Count != 0 && scoreMajors.Exists(e => e.majorCode == c.MajorEntityId) == true)
-                        {
-                            //If exists add old college in list
-                            var indexScoreInArr = scoreMajors.FindIndex(s => s.majorCode == c.MajorEntityId);
-                            scoreMajors[indexScoreInArr].scores.Add(new JsonScore(year, c.score, c.groupCode));
-                        }
-                        else
-                        {
-                            var major = this._majorRepository.findByCode(c.MajorEntityId).Result;
-                            var scoreMajor = new ScoreMajor();
-                            scoreMajor.majorCode = major.code;
-                            scoreMajor.majorName = major.name;
-                            scoreMajor.scores.Add(new JsonScore(year, c.score, c.groupCode));
-                            scoreMajors.Add(scoreMajor);
-                        }
-                    }
+                    JsonScoreMajorGroupByYears jsgby = new JsonScoreMajorGroupByYears();
 
-                });
-                jsonCollege.majors = scoreMajors;
+                    jsgby.groupCode = mc.groupCode;
+                    jsgby.majorCode = mc.MajorEntityId;
+                    jsgby.majorName = _majorRepository.findByCode(jsgby.majorCode).Result.name;
+                    jsgby.score = mc.score;
+                    jsgbyList.Add(jsgby);
+                }
+
+                jmi.year = Convert.ToInt32(y);
+                jmi.majors = jsgbyList;
+                majors.Add(jmi);
             }
 
-            return jsonCollege;
+
+            jsonCollegeGroupByYears.collegeCode = code;
+            jsonCollegeGroupByYears.collegeName = collegeName;
+            jsonCollegeGroupByYears.majors = majors;
+
+            return jsonCollegeGroupByYears;
         }
 
 

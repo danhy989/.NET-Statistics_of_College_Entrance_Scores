@@ -5,13 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Statistics_College_Entrance_Scores.Payload;
 
 namespace Statistics_College_Entrance_Scores.Service
 {
 
     public interface IMajorService
     {
-        JsonMajor findScoreByMajorCode(string majorCode,IList<int> years);
+        JsonMajorGroupByYears findScoreByMajorCode(string majorCode,IList<int> years);
         List<MajorEntity> GetAll();
         MajorEntity findByCode(string code);
         JsonMajor findScoreByCollegeCompared(string majorCode, IList<string> collegeCodes, IList<int> years);
@@ -41,9 +42,41 @@ namespace Statistics_College_Entrance_Scores.Service
             return this._majorRepository.findByCode(code).Result;
         }
 
-        public JsonMajor findScoreByMajorCode(string majorCode, IList<int> years)
+        public JsonMajorGroupByYears findScoreByMajorCode(string majorCode, IList<int> years)
         {
-            return this.CreateJsonFindScore(majorCode, null, years, false);
+            var jsonMajorGroupByYears = new JsonMajorGroupByYears();
+
+            var majorName = _majorRepository.findByCode(majorCode).Result.name;
+            var colleges = new List<JsonCollegesInMajorGroupByYears>();
+
+            foreach (var y in years)
+            {
+                var jci = new JsonCollegesInMajorGroupByYears();
+                var jscgbyList = new List<JsonScoreCollegeGroupByYears>();
+
+                var majorColleges = _majorCollegeRepository.GetMajorCollegesByMajorCodeAndYear(majorCode, y).Result;
+                foreach (var mc in majorColleges)
+                {
+                    JsonScoreCollegeGroupByYears jscgby = new JsonScoreCollegeGroupByYears();
+
+                    jscgby.groupCode = mc.groupCode;
+                    jscgby.collegeCode = mc.CollegeEntityId;
+                    jscgby.collegeName = _collegeRepository.findByCode(mc.CollegeEntityId).Result.name;
+                    jscgby.score = mc.score;
+                    jscgbyList.Add(jscgby);
+                }
+
+                jci.year = Convert.ToInt32(y);
+                jci.colleges = jscgbyList;
+                colleges.Add(jci);
+            }
+
+
+            jsonMajorGroupByYears.majorCode = majorCode;
+            jsonMajorGroupByYears.majorName = majorName;
+            jsonMajorGroupByYears.colleges = colleges;
+
+            return jsonMajorGroupByYears;
         }
 
         public JsonMajor findScoreByCollegeCompared(string majorCode, IList<string> collegeCodes, IList<int> years)
