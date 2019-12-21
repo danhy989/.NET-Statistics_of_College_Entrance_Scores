@@ -13,14 +13,14 @@ namespace Statistics_College_Entrance_Scores.Repository
         Task<List<MajorCollege>> GetMajorCollegesByMajorCodeAndYear(string code, int year);
         Task<List<MajorCollege>> GetMajorCollegesByCollegeCodeAndYear(string code, int year);
         List<MajorCollege> findScoreByCollegeCompared(string majorCode, IList<string> collegeCodes, int year);
-        double[] GetPastYearsTrainData();
+        double[] GetPastYearsTrainData(string collegeCode,string majorCode);
         List<CollegeEntity> GetCollegeByGroupCode(string groupCode);
         List<MajorEntity> GetMajorByGroupCode(string groupCode);
         double[] GetScores(string majorCode, string collegeCode, double[] years);
         int[] GetYears();
         Task<List<MajorEntity>> FindMajorAndCollegeByName(string name);
-
-    }
+		Task<MajorCollege> GetMajorCollegesByCollegeCodeAndMajorAndYear(string collegeId, string majorId, double y);
+	}
     public class MajorCollegeRepository : IMajorCollegeRepository
     {
         private readonly EntranceScoresContext _context;
@@ -51,10 +51,10 @@ namespace Statistics_College_Entrance_Scores.Repository
             return rs;
         }
 
-        public double[] GetPastYearsTrainData()
+        public double[] GetPastYearsTrainData(string collegeCode, string majorCode)
         {
             var yearsQuery = _context.majorColleges
-                .Where(s=>s.MajorEntityId.Equals("7340122") && s.CollegeEntityId.Equals("QSC"))
+                .Where(s=>s.MajorEntityId.Equals(majorCode) && s.CollegeEntityId.Equals(collegeCode))
                 .GroupBy( c => new { c.year })
                 .Select(g => new
                 {
@@ -112,6 +112,12 @@ namespace Statistics_College_Entrance_Scores.Repository
                 .FromSql(rawSqlString, param)
                 .ToList());
             return listMajors;
+        }
+
+        public async Task<MajorCollege> GetMajorCollegesByCollegeCodeAndMajorAndYear(string collegeId, string majorId, double y)
+        {
+            return await Task.Run(() => _context.majorColleges.Where(rs => rs.CollegeEntityId.Equals(collegeId)
+            && rs.MajorEntityId.Equals(majorId) && rs.year.Equals(Convert.ToInt32(y))).FirstOrDefault());
         }
     }
 }

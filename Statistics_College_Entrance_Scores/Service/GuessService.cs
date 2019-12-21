@@ -29,7 +29,7 @@ namespace Statistics_College_Entrance_Scores.Service
 
         public JsonGuessScore guessMajorScoreById(string majorCode,string collegeCode, IList<int> yearsGuess)
         {
-            var yearsPastTrainData = this._majorCollegeRepository.GetPastYearsTrainData();
+            var yearsPastTrainData = this._majorCollegeRepository.GetPastYearsTrainData(collegeCode,majorCode);
             var scoresPastTrainData = this._majorCollegeRepository.GetScores(majorCode, collegeCode, yearsPastTrainData);
             var guessScoreYearList = new List<JsonScore>();
             foreach(var y in yearsGuess)

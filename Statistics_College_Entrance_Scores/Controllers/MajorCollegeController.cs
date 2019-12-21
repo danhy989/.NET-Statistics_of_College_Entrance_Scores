@@ -43,5 +43,25 @@ namespace Statistics_College_Entrance_Scores.Controllers
             }
             return Ok(new JsonResponse(took, null, rs));
         }
+
+        [HttpPost("statistic")]
+        public IActionResult GetScoreThroughYears([FromBody] MajorCollegeDTO majorCollegeDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            var rs = this._majorCollegeService.getScoreThroughYears(majorCollegeDTO.collegeId,majorCollegeDTO.majorId);
+            watch.Stop();
+            var took = watch.ElapsedMilliseconds;
+            if (rs == null)
+            {
+                return NotFound(new JsonResponse(took, MessagesResponse.MESSAGE_NOT_FOUND, null));
+            }
+            return Ok(new JsonResponse(took, null, rs));
+        }
+
+
     }
 }
