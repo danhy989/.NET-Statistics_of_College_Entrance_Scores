@@ -15,7 +15,7 @@ namespace Statistics_College_Entrance_Scores.Service
         JsonMajorGroupByYears findScoreByMajorCode(string majorCode,List<int> years);
         List<MajorEntity> GetAll();
         MajorEntity findByCode(string code);
-        JsonMajor findScoreByCollegeCompared(string majorCode, IList<string> collegeCodes, IList<int> years);
+        JsonCompare findScoreByCollegeCompared(string majorCode, IList<string> collegeCodes, int year);
         List<MajorEntity> GetMajorsByGroupCode(string groupCode);
         List<MajorEntity> GetMajorsByName(string name);
     }
@@ -80,63 +80,35 @@ namespace Statistics_College_Entrance_Scores.Service
             return jsonMajorGroupByYears;
         }
 
-        public JsonMajor findScoreByCollegeCompared(string majorCode, IList<string> collegeCodes, IList<int> years)
+        public JsonCompare findScoreByCollegeCompared(string majorCode, IList<string> collegeCodes, int year)
         {
-            return this.CreateJsonFindScore(majorCode,collegeCodes,years,true);
-        }
+            var jsonCompare = new JsonCompare();
+            var majorName = _majorRepository.findByCode(majorCode).Result.name;
+            var jsonCompareColleges = new List<JsonCompareColleges>();
 
-        public JsonMajor CreateJsonFindScore(string majorCode, IList<string> collegeCodes, IList<int> years,Boolean compare)
-        {
-            var jsonMajor = new JsonMajor();
-            var scoreColleges = new List<ScoreCollege>();
-            var major = this._majorRepository.findByCode(majorCode).Result;
-            jsonMajor.majorCode = major.code;
-            jsonMajor.majorName = major.name;
+            var majorColleges = _majorCollegeRepository.findScoreByCollegeCompared(majorCode, collegeCodes, year);
 
-            foreach (var year in years)
+            foreach(var mc in majorColleges)
             {
-                jsonMajor.years.Add(year);
+                if (mc == null) continue;
+                var jsonCC = new JsonCompareColleges();
 
-                List<MajorCollege> majorColleges = new List<MajorCollege>();
+                jsonCC.collegeCode = mc.CollegeEntityId;
+                jsonCC.collegeName = _collegeRepository.findByCode(mc.CollegeEntityId).Result.name;
+                jsonCC.groupCode = mc.groupCode;
+                jsonCC.score = mc.score;
 
-                if (compare)
-                {
-                   majorColleges = this._majorCollegeRepository.findScoreByCollegeCompared(majorCode, collegeCodes, year);
-                }
-                else
-                {
-                   majorColleges = this._majorCollegeRepository.GetMajorCollegesByMajorCodeAndYear(majorCode, year).Result;
-                }
-                
-                majorColleges.ForEach(c =>
-                {
-                    if (c != null)
-                    {
-                        // Ignore benchmarking capacity test
-                        if (c.score <= 30)
-                        {
-                            if (scoreColleges.Count != 0 && scoreColleges.Exists(e => e.collegeCode == c.CollegeEntityId) == true)
-                            {
-                                //If exists add old college in list
-                                var indexScoreInArr = scoreColleges.FindIndex(s => s.collegeCode == c.CollegeEntityId);
-                                scoreColleges[indexScoreInArr].scores.Add(new JsonScore(year, c.score, c.groupCode));
-                            }
-                            else
-                            {
-                                var college = this._collegeRepository.findByCode(c.CollegeEntityId).Result;
-                                var scoreCollege = new ScoreCollege();
-                                scoreCollege.collegeCode = college.code;
-                                scoreCollege.collegeName = college.name;
-                                scoreCollege.scores.Add(new JsonScore(year, c.score, c.groupCode));
-                                scoreColleges.Add(scoreCollege);
-                            }
-                        }
-                    }
-                });
-                jsonMajor.colleges = scoreColleges;
+                jsonCompareColleges.Add(jsonCC);
             }
-            return jsonMajor;
+
+            jsonCompare.majorCode = majorCode;
+            jsonCompare.majorName = majorName;
+            jsonCompare.year = year;
+            jsonCompare.colleges = jsonCompareColleges;
+            
+            return jsonCompare;
         }
+
         public List<MajorEntity> GetMajorsByGroupCode(string groupCode)
         {
             var majors = _majorCollegeRepository.GetMajorByGroupCode(groupCode);

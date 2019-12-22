@@ -81,7 +81,7 @@ namespace Statistics_College_Entrance_Scores.Controllers
                 return BadRequest(ModelState);
             }
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            var rs = this._majorService.findScoreByCollegeCompared(scoreCollegeComparedDTO.majorCode, scoreCollegeComparedDTO.collegeCodes, scoreCollegeComparedDTO.years);
+            var rs = this._majorService.findScoreByCollegeCompared(scoreCollegeComparedDTO.majorCode, scoreCollegeComparedDTO.collegeCodes, scoreCollegeComparedDTO.year);
             watch.Stop();
             var took = watch.ElapsedMilliseconds;
             if (rs == null)

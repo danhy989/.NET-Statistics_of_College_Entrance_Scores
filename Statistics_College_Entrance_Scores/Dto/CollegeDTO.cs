@@ -20,15 +20,15 @@ namespace Statistics_College_Entrance_Scores.dto
 
     public class ScoreCollegeComparedDTO
     {
-        public ScoreCollegeComparedDTO(string majorCode, IList<string> collegeCodes, IList<int> years)
+        public ScoreCollegeComparedDTO(string majorCode, IList<string> collegeCodes, int year)
         {
             this.majorCode = majorCode;
             this.collegeCodes = collegeCodes;
-            this.years = years;
+            this.year = year;
         }
 
         public string majorCode { get; set; }
         public IList<string> collegeCodes { get; set; }
-        public IList<int> years { get; set; }
+        public int year { get; set; }
     }
 }
