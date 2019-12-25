@@ -14,8 +14,8 @@ namespace Statistics_College_Entrance_Scores.Service
     }
     public class GuessService : IGuessService
     {
-        const string INFO_TEXT_LINEAR = "Using Linear Regression";
-        const string INFO_TEXT_POLY = "Using Polynomial Regression";
+        const string INFO_TEXT_LINEAR = "Linear Regression";
+        const string INFO_TEXT_POLY = "Polynomial Regression";
 
         private readonly IMajorCollegeRepository _majorCollegeRepository;
         private readonly IMajorRepository _majorRepository;

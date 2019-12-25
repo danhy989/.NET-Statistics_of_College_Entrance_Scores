@@ -13,9 +13,12 @@ namespace Statistics_College_Entrance_Scores.Service
         List<MajorEntity> FindMajorAndCollegeByName(string name);
 		JsonMajorCollege getScoreThroughYears(string collegeId, string majorId);
         HashSet<string> getGroupCodeBy(string collegeCode, string majorCode);
+        string[] GetGroupCode();
     }
     public class MajorCollegeService : IMajorCollegeService
     {
+        private string[] GROUP_CODE = { "A", "A1", "B", "C", "D", "D1", "D2","D3", "D4", "D5", "D6", "H",
+                        "M", "N","N1", "S", "T", "K", "R", "V" };
         private readonly IMajorCollegeRepository _majorCollegeRepository;
         private readonly IMajorRepository _majorRepository;
         private readonly ICollegeRepository _collegeRepository;
@@ -70,9 +73,6 @@ namespace Statistics_College_Entrance_Scores.Service
             jsonMajorCollege.scores = jsonScores;
             return jsonMajorCollege;
         }
-
-      
-
        
         public HashSet<string> getGroupCodeBy(string collegeCode, string majorCode)
         {
@@ -85,6 +85,12 @@ namespace Statistics_College_Entrance_Scores.Service
                 listRsSet.UnionWith(strlist);
             }
             return listRsSet;
+        }
+
+        public string[] GetGroupCode()
+        {
+            return this.GROUP_CODE;
+
         }
     }
 }
