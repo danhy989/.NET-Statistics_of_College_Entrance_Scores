@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Source\\me\\.NET-Statistics_of_College_Entrance_Scores\\Statistics_College_Entrance_Scores\\Statistics_College_Entrance_Scores.csproj": {}
+    "C:\\Users\\Globee\\Documents\\GitHub\\.NET-Statistics_of_College_Entrance_Scores\\Statistics_College_Entrance_Scores\\Statistics_College_Entrance_Scores.csproj": {}
   },
   "projects": {
-    "D:\\Source\\me\\.NET-Statistics_of_College_Entrance_Scores\\Statistics_College_Entrance_Scores\\Statistics_College_Entrance_Scores.csproj": {
+    "C:\\Users\\Globee\\Documents\\GitHub\\.NET-Statistics_of_College_Entrance_Scores\\Statistics_College_Entrance_Scores\\Statistics_College_Entrance_Scores.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Source\\me\\.NET-Statistics_of_College_Entrance_Scores\\Statistics_College_Entrance_Scores\\Statistics_College_Entrance_Scores.csproj",
+        "projectUniqueName": "C:\\Users\\Globee\\Documents\\GitHub\\.NET-Statistics_of_College_Entrance_Scores\\Statistics_College_Entrance_Scores\\Statistics_College_Entrance_Scores.csproj",
         "projectName": "Statistics_College_Entrance_Scores",
-        "projectPath": "D:\\Source\\me\\.NET-Statistics_of_College_Entrance_Scores\\Statistics_College_Entrance_Scores\\Statistics_College_Entrance_Scores.csproj",
-        "packagesPath": "C:\\Users\\danhy989\\.nuget\\packages\\",
-        "outputPath": "D:\\Source\\me\\.NET-Statistics_of_College_Entrance_Scores\\Statistics_College_Entrance_Scores\\obj\\",
+        "projectPath": "C:\\Users\\Globee\\Documents\\GitHub\\.NET-Statistics_of_College_Entrance_Scores\\Statistics_College_Entrance_Scores\\Statistics_College_Entrance_Scores.csproj",
+        "packagesPath": "C:\\Users\\Globee\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Globee\\Documents\\GitHub\\.NET-Statistics_of_College_Entrance_Scores\\Statistics_College_Entrance_Scores\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\danhy989\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Globee\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
