@@ -8,10 +8,7 @@ namespace Statistics_College_Entrance_Scores.Common
 {
     public class RegressionHelper
     {
-        public static double LinearRegression(
-            double[] xVals,
-            double[] yVals,
-            int year)
+        public static double LinearRegression(double[] xVals, double[] yVals, int year)
         {
 			
             if (xVals.Length != yVals.Length)
@@ -43,20 +40,20 @@ namespace Statistics_College_Entrance_Scores.Common
             double p0 = p[0] - year;
             double p1 = p[1];
             double p2 = p[2];
-            double denta = p1 * p1 - 4 * p2 * p0;
+            double delta = p1 * p1 - 4 * p2 * p0;
 
-            if (denta < 0)
+            if (delta < 0)
             {
                 return new double[]{ };
             }
 
-            if(denta == 0)
+            if(delta == 0)
             {
                 x1 = -p1 / (2*p2);
                 return new double[] { x1 };
             }
 
-            double sqrtDenta = System.Math.Sqrt(denta);
+            double sqrtDenta = System.Math.Sqrt(delta);
             double denominator = 2 * p2;
             x1 = (-p1 + sqrtDenta) / denominator;
             x2 = (-p1 - sqrtDenta) / denominator;

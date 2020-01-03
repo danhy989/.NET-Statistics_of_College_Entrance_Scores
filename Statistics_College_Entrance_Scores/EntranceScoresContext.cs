@@ -41,12 +41,7 @@ namespace Statistics_College_Entrance_Scores
 				.HasConstraintName("ForeignKey_Province_CollegeEntity");
 		}
 
-		public void Dispose()
-		{
-			GC.SuppressFinalize(this);
-		}
-
-
-	}
+        public void Dispose() => GC.SuppressFinalize(this);
+    }
 }
 

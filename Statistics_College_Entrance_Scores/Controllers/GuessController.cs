@@ -32,7 +32,7 @@ namespace Statistics_College_Entrance_Scores.Controllers
 
 			var watch = System.Diagnostics.Stopwatch.StartNew();
 
-			var currentYear = DateTime.Now.Year;
+			var currentYear = DateTime.Now.Year - 1;
 
 			var checkGuessYear = guessScoreDTO.years.Where(c => c <= currentYear).Count();
 

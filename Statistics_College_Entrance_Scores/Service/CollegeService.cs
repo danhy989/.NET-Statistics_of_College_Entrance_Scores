@@ -1,10 +1,8 @@
 ﻿using Statistics_College_Entrance_Scores.entity;
-using Statistics_College_Entrance_Scores.Dto;
 using Statistics_College_Entrance_Scores.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Statistics_College_Entrance_Scores.Payload;
 
 namespace Statistics_College_Entrance_Scores.Service
