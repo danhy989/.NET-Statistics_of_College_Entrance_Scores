@@ -55,11 +55,11 @@ namespace Statistics_College_Entrance_Scores.Service
             {
                 var scoreGuessLinear = RegressionHelper.LinearRegression(yearsPastTrainData, scoresPastTrainData, y);
                 guessScoreYearList.Add(new JsonScore(y, scoreGuessLinear, groupCode,INFO_TEXT_LINEAR));
-                var scoreGuessPolys = RegressionHelper.PolynomialRegression(scoresPastTrainData, yearsPastTrainData, y);
-                foreach (var SGP in scoreGuessPolys)
-                {
-                    guessScoreYearList.Add(new JsonScore(y, SGP, groupCode, INFO_TEXT_POLY));
-                }
+                //var scoreGuessPolys = RegressionHelper.PolynomialRegression(scoresPastTrainData, yearsPastTrainData, y);
+                //foreach (var SGP in scoreGuessPolys)
+                //{
+                //    guessScoreYearList.Add(new JsonScore(y, SGP, groupCode, INFO_TEXT_POLY));
+                //}
             }
 
             return new JsonGuessScore(collegeCode,collegeName,majorCode,majorName,groupCode,guessScoreYearList);

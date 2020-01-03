@@ -53,10 +53,10 @@ namespace Statistics_College_Entrance_Scores.Common
                 return new double[] { x1 };
             }
 
-            double sqrtDenta = System.Math.Sqrt(delta);
+            double sqrtDelta = System.Math.Sqrt(delta);
             double denominator = 2 * p2;
-            x1 = (-p1 + sqrtDenta) / denominator;
-            x2 = (-p1 - sqrtDenta) / denominator;
+            x1 = (-p1 + sqrtDelta) / denominator;
+            x2 = (-p1 - sqrtDelta) / denominator;
             
             return new double[]{ x1, x2 };
         }
